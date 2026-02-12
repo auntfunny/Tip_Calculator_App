@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accGreen1: hsl(172, 67%, 45%);
+  --color-accGreen2: hsl(183, 100%, 15%);
+  --color-accGreen3: hsl(173, 61%, 77%);
+  --color-accGray1: hsl(186, 14%, 43%);
+  --color-accGray2: hsl(184, 14%, 56%);
+  --color-accGray3: hsl(185, 41%, 84%);
+  --color-accGray4: hsl(189, 47%, 97%);
+  --color-accWhite: hsl(0, 100%, 100%);
+  --color-accError: hsl(11, 69%, 61%);
+
+  --font-space: "Space Mono", serif;
+}

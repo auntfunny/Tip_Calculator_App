@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Tip_Calculator_App</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body
+    class="bg-accGray3 flex flex-col justify-end lg:justify-center items-center min-h-screen font-space font-bold text-accGray1 text-2xl"
+  >
+    <h1 id="companyID" class="m-12 lg:mt-0">
+      <img src="./src/images/logo.svg" alt="Splitter Logo" />
+    </h1>
+    <form
+      id="tipSplitForm"
+      class="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-6 bg-accWhite p-6 rounded-t-3xl lg:rounded-3xl w-full lg:w-216 h-full"
+    >
+      <section
+        id="inputsSection"
+        class="flex flex-col gap-8 w-11/12 h-full lg:p-6"
+      >
+        <div class="flex flex-col w-full gap-2">
+          <h2 class="text-base">Bill</h2>
+          <div class="relative">
+            <img
+              src="./src/images/icon-dollar.svg"
+              alt="Dollar Icon"
+              class="absolute top-4 left-4"
+            />
+            <input
+              type="number"
+              step="0.01"
+              id="totalBill"
+              placeholder="0"
+              inputmode="numeric"
+              class="rounded-md bg-accGray4 w-full p-2 text-accGreen2 text-right hover:inset-ring-1 hover:inset-ring-accGray3 focus:outline-none focus:inset-ring-2 focus:inset-ring-accGreen1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h2 class="text-base">Select Tip %</h2>
+          <div
+            class="grid grid-cols-2 lg:grid-cols-3 grid-rows-3 lg:grid-rows-2 gap-4 w-full"
+          >
+            <button
+              type="button"
+              id="fivePercentButton"
+              value="5"
+              ;
+              class="tipButton p-2 bg-accGreen2 text-accWhite rounded-md hover:bg-accGreen3 hover:text-accGreen2 active:bg-accGreen1"
+            >
+              5%
+            </button>
+            <button
+              type="button"
+              id="tenPercentButton"
+              value="10"
+              class="tipButton p-2 bg-accGreen2 text-accWhite rounded-md hover:bg-accGreen3 hover:text-accGreen2 active:bg-accGreen1"
+            >
+              10%
+            </button>
+            <button
+              type="button"
+              id="fifteenPercentButton"
+              value="15"
+              class="tipButton p-2 bg-accGreen2 text-accWhite rounded-md hover:bg-accGreen3 hover:text-accGreen2 active:bg-accGreen1"
+            >
+              15%
+            </button>
+            <button
+              type="button"
+              id="twentyFivePercentButton"
+              value="25"
+              class="tipButton p-2 bg-accGreen2 text-accWhite rounded-md hover:bg-accGreen3 hover:text-accGreen2 active:bg-accGreen1"
+            >
+              25%
+            </button>
+            <button
+              type="button"
+              id="fiftyPercentButton"
+              value="50"
+              class="tipButton p-2 bg-accGreen2 text-accWhite rounded-md hover:bg-accGreen3 hover:text-accGreen2 active:bg-accGreen1"
+            >
+              50%
+            </button>
+            <input
+              type="number"
+              id="customTipPercentage"
+              placeholder="Custom"
+              inputmode="numeric"
+              class="tipButton rounded-md bg-accGray4 w-full p-2 pr-4 lg:text-xl text-accGreen2 text-right placeholder:text-accGray1 hover:inset-ring-1 hover:inset-ring-accGray3 focus:outline-none focus:inset-ring-2 focus:inset-ring-accGreen1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+          </div>
+        </div>
+        <div class="relative flex flex-col w-full gap-2">
+          <h2 class="text-base">Number of People</h2>
+          <p id="errorMessage" class="hidden absolute top-0 right-0 text-base text-accError ">Can't be zero</p>
+          <div class="relative">
+            <img
+              src="./src/images/icon-person.svg"
+              alt="Person Icon"
+              class="absolute top-4 left-4"
+            />
+            <input
+              type="number"
+              id="numberOfPeople"
+              placeholder="0"
+              inputmode="numeric"
+              class="rounded-md bg-accGray4 w-full p-2 text-accGreen2 text-right hover:inset-ring-1 hover:inset-ring-accGray3 focus:outline-none focus:inset-ring-2 focus:inset-ring-accGreen1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+          </div>
+        </div>
+      </section>
+      <section
+        id="totalsSection"
+        class="flex flex-col relative gap-4 justify-center lg:justify-between bg-accGreen2 rounded-2xl w-11/12 lg:max-w-181 p-6 lg:px-12 pt-10 lg:pt-16 min-h-64 lg:h-100"
+      >
+        <div class="flex justify-between items-center w-full">
+          <div>
+            <h3 class="text-accWhite text-base">Tip Amount</h3>
+            <p class="text-sm text-accGray2">/ person</p>
+          </div>
+          <output
+            id="totalTipPerson"
+            for="totalBill fivePercentButton tenPercentButton fifteenPercentButton twentyFivePercentButton fiftyPercentButton customTipPercentage numberOfPeople"
+            class="text-accGreen1 text-3xl lg:text-4xl"
+            >$0.00</output
+          >
+        </div>
+        <div
+          class="flex justify-between items-center w-full lg:relative lg:bottom-8"
+        >
+          <div>
+            <h3 class="text-accWhite text-base">Total</h3>
+            <p class="text-sm text-accGray2">/ person</p>
+          </div>
+          <output
+            id="totalBillPerson"
+            for="totalBill fivePercentButton tenPercentButton fifteenPercentButton twentyFivePercentButton fiftyPercentButton customTipPercentage numberOfPeople"
+            class="text-accGreen1 text-3xl lg:text-4xl"
+            >$0.00</output
+          >
+        </div>
+        <button
+          type="reset"
+          id="clearAllButton"
+          class="w-full mt-8 bg-accGreen1 text-accGreen2 text-lg rounded-sm p-2 hover:bg-accGreen3 active:scale-105"
+        >
+          RESET
+        </button>
+      </section>
+    </form>
+  </body>
+</html>
