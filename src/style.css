@@ -10,6 +10,7 @@
   --color-accGray4: hsl(189, 47%, 97%);
   --color-accWhite: hsl(0, 100%, 100%);
   --color-accError: hsl(11, 69%, 61%);
+  --color-accInactive: hsl(183, 80%, 24%);
 
   --font-space: "Space Mono", serif;
 }

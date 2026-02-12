@@ -25,6 +25,7 @@ Button Selection and change of colors
 
 let activeButton = null;
 let errorToggle = 0;
+let buttonToggle = 0;
 
 
 
@@ -114,15 +115,21 @@ function clearButtons(){
     tipPercent = 0;
     billToPay = 0;
     if(errorToggle > 0){
-            errorMessage.classList.toggle("hidden");
-            numberOfPeople.classList.toggle("inset-ring-accError");
-            numberOfPeople.classList.toggle("inset-ring-2");
-            numberOfPeople.classList.toggle("hover:inset-ring-accGray3");
-            numberOfPeople.classList.toggle("focus:inset-ring-accGreen1");
-            numberOfPeople.classList.toggle("hover:inset-ring-1");
-            errorToggle--;
-        }
-    
+        errorMessage.classList.toggle("hidden");
+        numberOfPeople.classList.toggle("inset-ring-accError");
+        numberOfPeople.classList.toggle("inset-ring-2");
+        numberOfPeople.classList.toggle("hover:inset-ring-accGray3");
+        numberOfPeople.classList.toggle("focus:inset-ring-accGreen1");
+        numberOfPeople.classList.toggle("hover:inset-ring-1");
+        errorToggle--;
+    }
+
+    if(buttonToggle > 0){
+        clearAllButton.classList.toggle("bg-accInactive");
+        clearAllButton.classList.toggle("bg-accGreen1");
+        buttonToggle--;
+    }
+
 
 }
 
@@ -160,22 +167,50 @@ allButtons.forEach(button => {
 
 function assignValueBill(event){
     billToPay = Number(event.target.value);
-    console.log(billToPay.toLocaleString('en-US', { style: 'currency', currency: 'USD' }));
 
-    if(totalPeople !== 0 && tipPercent !== 0){
+     if(billToPay == 0){
+        let tipMoney = 0;
+        let billMoney = 0;
+        
+        totalBillPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(billMoney);
+
+        totalTipPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(tipMoney);
+        
+    } else if(totalPeople !== 0 && tipPercent !== 0){
         let tipToPay = billToPay * (tipPercent / 100);
-        totalTipPerson.value = tipToPay / totalPeople;
-        totalBillPerson.value = (tipToPay + billToPay) / totalPeople;
-        console.log(totalTipPerson.value);
-        console.log(totalBillPerson.value);
-        console.log(tipToPay);
+        let tipMoney = tipToPay / totalPeople;
+        let billMoney = (tipToPay + billToPay) / totalPeople;
+
+        totalBillPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(billMoney);
+
+        totalTipPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(tipMoney);
+    }
+    if(totalPeople === 0 && tipPercent === 0 && billToPay === 0){
+        clearAllButton.classList.toggle("bg-accInactive");
+        clearAllButton.classList.toggle("bg-accGreen1");
+        buttonToggle--;
+    } else if(buttonToggle === 0){
+        clearAllButton.classList.toggle("bg-accInactive");
+        clearAllButton.classList.toggle("bg-accGreen1");
+        buttonToggle++;
     }
 
 }
 
 function assignValuePeople(event){
     totalPeople = Number(event.target.value);
-    console.log(totalPeople);
     if(errorToggle > 0){
             errorMessage.classList.toggle("hidden");
             numberOfPeople.classList.toggle("inset-ring-accError");
@@ -184,17 +219,22 @@ function assignValuePeople(event){
             numberOfPeople.classList.toggle("focus:inset-ring-accGreen1");
             numberOfPeople.classList.toggle("hover:inset-ring-1");
             errorToggle--;
-        }
-    
+    }
 
-    if(billToPay !== 0 && tipPercent !== 0 && totalPeople !== 0){
-        let tipToPay = billToPay * (tipPercent / 100);
-        totalTipPerson.value = tipToPay / totalPeople;
-        totalBillPerson.value = (tipToPay + billToPay) / totalPeople;
-        console.log(totalTipPerson.value);
-        console.log(totalBillPerson.value);
-        console.log(tipToPay);
-    } else if (totalPeople === 0){
+     if(totalPeople == 0){
+        let tipMoney = 0;
+        let billMoney = 0;
+        
+        totalBillPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(billMoney);
+
+        totalTipPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(tipMoney);
+
         errorMessage.classList.toggle("hidden");
         numberOfPeople.classList.toggle("inset-ring-accError");
         numberOfPeople.classList.toggle("inset-ring-2");
@@ -203,32 +243,80 @@ function assignValuePeople(event){
         numberOfPeople.classList.toggle("hover:inset-ring-1");
 
         errorToggle++;
+        
+    } else if(billToPay !== 0 && tipPercent !== 0 && totalPeople !== 0){
+        let tipToPay = billToPay * (tipPercent / 100);
+        let tipMoney = tipToPay / totalPeople;
+        let billMoney = (tipToPay + billToPay) / totalPeople;
+
+        totalBillPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(billMoney);
+
+        totalTipPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(tipMoney);
+
+
+    } else
+
+    if(totalPeople === 0 && tipPercent === 0 && billToPay === 0){
+        clearAllButton.classList.toggle("bg-accInactive")
+        clearAllButton.classList.toggle("bg-accGreen1")
+    } else if(buttonToggle === 0){
+        clearAllButton.classList.toggle("bg-accInactive");
+        clearAllButton.classList.toggle("bg-accGreen1");
+        buttonToggle++;
     }
 }
 
 function assignValuePercent(event){
 
     tipPercent = Number(event.target.value);
-    console.log(tipPercent);
 
-    if(totalPeople !== 0 && billToPay !== 0){
-        let tipToPay = billToPay * (tipPercent / 100);
-        totalTipPerson.value = Number(tipToPay / totalPeople);
-        totalBillPerson.value = Number((tipToPay + billToPay) / totalPeople);
-
+    if(tipPercent == 0){
+        let tipMoney = 0;
+        let billMoney = 0;
         
-        console.log(totalTipPerson.value.toLocaleString('en-US', { style: 'currency', currency: 'USD' }));
-        console.log(totalBillPerson.value.toLocaleString('en-US', { style: 'currency', currency: 'USD' }));
-        console.log(tipToPay);
+        totalBillPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(billMoney);
 
+        totalTipPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(tipMoney);
 
+    } else if(totalPeople !== 0 && billToPay !== 0){
+        let tipToPay = billToPay * (tipPercent / 100);
+        let tipMoney = Number(tipToPay / totalPeople);
+        let billMoney = Number((tipToPay + billToPay) / totalPeople);
+
+        totalBillPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(billMoney);
+
+        totalTipPerson.value = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        }).format(tipMoney);
+
+    }
+
+     if(totalPeople === 0 && tipPercent === 0 && billToPay === 0){
+        clearAllButton.classList.toggle("bg-accInactive")
+        clearAllButton.classList.toggle("bg-accGreen1")
+    } else if(buttonToggle === 0){
+        clearAllButton.classList.toggle("bg-accInactive");
+        clearAllButton.classList.toggle("bg-accGreen1");
+        buttonToggle++;
     }
 }
 
-const largeNum = 1234567.89;
-// Format as currency (e.g., USD)
-console.log(largeNum.toLocaleString('en-US', { style: 'currency', currency: 'USD' })); // Output: "$1,234,567.89"
-// Format with locale-specific number separators
-console.log(largeNum.toLocaleString('de-DE')); // Output: "1.234.567,89"
+
 
 
