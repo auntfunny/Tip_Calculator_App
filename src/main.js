@@ -107,6 +107,7 @@ function clearButtons(){
     } else if(activeButton === customTipPercentage && customTipPercentage.value != 0) {
         activeButton.classList.toggle("inset-ring-accGreen2");
         activeButton.classList.toggle("inset-ring-2");
+        customToggle = 0;
     }
 
     activeButton = null;
