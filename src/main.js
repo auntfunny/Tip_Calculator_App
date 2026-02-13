@@ -26,6 +26,7 @@ Button Selection and change of colors
 let activeButton = null;
 let errorToggle = 0;
 let buttonToggle = 0;
+let customToggle = 0;
 
 
 
@@ -61,10 +62,11 @@ function changeBackground(event){
         activeButton.classList.toggle("bg-accGreen1");
         activeButton.classList.toggle("text-accWhite");
         activeButton.classList.toggle("text-accGreen2");
-    } else if(activeButton === customTipPercentage) {
+    } else if(activeButton === customTipPercentage && customTipPercentage.value != 0 ) {
         customTipPercentage.value = "";
         activeButton.classList.toggle("inset-ring-accGreen2");
         activeButton.classList.toggle("inset-ring-2");
+        customToggle--;
     }
 
     if(event.target !== customTipPercentage){
@@ -72,10 +74,7 @@ function changeBackground(event){
         event.target.classList.toggle("bg-accGreen1");
         event.target.classList.toggle("text-accWhite");
         event.target.classList.toggle("text-accGreen2");
-    } else if (event.target === customTipPercentage){
-        event.target.classList.toggle("inset-ring-accGreen2");
-        event.target.classList.toggle("inset-ring-2");
-    }
+    } 
     
 
     activeButton = event.target;
@@ -105,7 +104,7 @@ function clearButtons(){
         activeButton.classList.toggle("bg-accGreen1");
         activeButton.classList.toggle("text-accWhite");
         activeButton.classList.toggle("text-accGreen2");
-    } else if(activeButton === customTipPercentage) {
+    } else if(activeButton === customTipPercentage && customTipPercentage.value != 0) {
         activeButton.classList.toggle("inset-ring-accGreen2");
         activeButton.classList.toggle("inset-ring-2");
     }
@@ -221,6 +220,8 @@ function assignValuePeople(event){
             errorToggle--;
     }
 
+    
+
      if(totalPeople == 0){
         let tipMoney = 0;
         let billMoney = 0;
@@ -260,11 +261,12 @@ function assignValuePeople(event){
         }).format(tipMoney);
 
 
-    } else
+    }
 
     if(totalPeople === 0 && tipPercent === 0 && billToPay === 0){
         clearAllButton.classList.toggle("bg-accInactive")
         clearAllButton.classList.toggle("bg-accGreen1")
+        buttonToggle--;
     } else if(buttonToggle === 0){
         clearAllButton.classList.toggle("bg-accInactive");
         clearAllButton.classList.toggle("bg-accGreen1");
@@ -275,6 +277,8 @@ function assignValuePeople(event){
 function assignValuePercent(event){
 
     tipPercent = Number(event.target.value);
+
+    console.log(tipPercent);
 
     if(tipPercent == 0){
         let tipMoney = 0;
@@ -289,6 +293,8 @@ function assignValuePercent(event){
         style: 'currency',
         currency: 'USD',
         }).format(tipMoney);
+
+        
 
     } else if(totalPeople !== 0 && billToPay !== 0){
         let tipToPay = billToPay * (tipPercent / 100);
@@ -305,15 +311,34 @@ function assignValuePercent(event){
         currency: 'USD',
         }).format(tipMoney);
 
+    } 
+    
+    if(event.target === customTipPercentage && tipPercent != 0 && customToggle === 0) {
+        event.target.classList.toggle("inset-ring-accGreen2");
+        event.target.classList.toggle("inset-ring-2");
+        customToggle = 1;
+    }
+    let pleaseWorkThisTime = 0;
+    if(tipPercent != 0){
+        pleaseWorkThisTime = 1;
     }
 
-     if(totalPeople === 0 && tipPercent === 0 && billToPay === 0){
+
+    if(totalPeople === 0 && tipPercent === 0 && billToPay === 0 && pleaseWorkThisTime != 0){
         clearAllButton.classList.toggle("bg-accInactive")
         clearAllButton.classList.toggle("bg-accGreen1")
-    } else if(buttonToggle === 0){
+        buttonToggle--;
+        pleaseWorkThisTime = 0;
+    } else if(buttonToggle === 0 && pleaseWorkThisTime != 0){
         clearAllButton.classList.toggle("bg-accInactive");
         clearAllButton.classList.toggle("bg-accGreen1");
         buttonToggle++;
+        pleaseWorkThisTime = 0;
+    } else if(buttonToggle === 1 && tipPercent < 10){
+        clearAllButton.classList.toggle("bg-accInactive");
+        clearAllButton.classList.toggle("bg-accGreen1");
+        buttonToggle--;
+        pleaseWorkThisTime = 0;
     }
 }
 
