@@ -328,17 +328,17 @@ function assignValuePercent(event){
     if(totalPeople === 0 && tipPercent === 0 && billToPay === 0 && resetButtonColorToggle != 0){
         clearAllButton.classList.toggle("bg-accInactive")
         clearAllButton.classList.toggle("bg-accGreen1")
-        buttonToggle--;
+        buttonToggle = 0;
         resetButtonColorToggle = 0;
     } else if(buttonToggle === 0 && resetButtonColorToggle != 0){
         clearAllButton.classList.toggle("bg-accInactive");
         clearAllButton.classList.toggle("bg-accGreen1");
-        buttonToggle++;
+        buttonToggle = 1;
         resetButtonColorToggle = 0;
-    } else if(buttonToggle === 1 && tipPercent < 10){
+    } else if(buttonToggle === 1 && tipPercent < 10  && event.target !== fivePercentButton){
         clearAllButton.classList.toggle("bg-accInactive");
         clearAllButton.classList.toggle("bg-accGreen1");
-        buttonToggle--;
+        buttonToggle = 0;
         resetButtonColorToggle = 0;
     }
 }
