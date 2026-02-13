@@ -318,27 +318,27 @@ function assignValuePercent(event){
         event.target.classList.toggle("inset-ring-2");
         customToggle = 1;
     }
-    let pleaseWorkThisTime = 0;
+    let resetButtonColorToggle = 0;
     if(tipPercent != 0){
-        pleaseWorkThisTime = 1;
+        resetButtonColorToggle = 1;
     }
 
 
-    if(totalPeople === 0 && tipPercent === 0 && billToPay === 0 && pleaseWorkThisTime != 0){
+    if(totalPeople === 0 && tipPercent === 0 && billToPay === 0 && resetButtonColorToggle != 0){
         clearAllButton.classList.toggle("bg-accInactive")
         clearAllButton.classList.toggle("bg-accGreen1")
         buttonToggle--;
-        pleaseWorkThisTime = 0;
-    } else if(buttonToggle === 0 && pleaseWorkThisTime != 0){
+        resetButtonColorToggle = 0;
+    } else if(buttonToggle === 0 && resetButtonColorToggle != 0){
         clearAllButton.classList.toggle("bg-accInactive");
         clearAllButton.classList.toggle("bg-accGreen1");
         buttonToggle++;
-        pleaseWorkThisTime = 0;
+        resetButtonColorToggle = 0;
     } else if(buttonToggle === 1 && tipPercent < 10){
         clearAllButton.classList.toggle("bg-accInactive");
         clearAllButton.classList.toggle("bg-accGreen1");
         buttonToggle--;
-        pleaseWorkThisTime = 0;
+        resetButtonColorToggle = 0;
     }
 }
 
