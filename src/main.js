@@ -380,7 +380,7 @@ function assignValuePercent(event) {
     resetButtonColorToggle = 0;
   } else if (
     buttonToggle === 1 &&
-    tipPercent < 10 &&
+    tipPercent <= 0 &&
     event.target !== fivePercentButton
   ) {
     clearAllButton.classList.toggle("bg-accInactive");
