@@ -211,11 +211,11 @@ function assignValueBill(event) {
   if (totalPeople === 0 && tipPercent === 0 && billToPay === 0) {
     clearAllButton.classList.toggle("bg-accInactive");
     clearAllButton.classList.toggle("bg-accGreen1");
-    buttonToggle--;
+    buttonToggle = 0;
   } else if (buttonToggle === 0) {
     clearAllButton.classList.toggle("bg-accInactive");
     clearAllButton.classList.toggle("bg-accGreen1");
-    buttonToggle++;
+    buttonToggle = 1;
   }
 }
 
@@ -290,11 +290,11 @@ function assignValuePeople(event) {
   if (totalPeople === 0 && tipPercent === 0 && billToPay === 0) {
     clearAllButton.classList.toggle("bg-accInactive");
     clearAllButton.classList.toggle("bg-accGreen1");
-    buttonToggle--;
+    buttonToggle = 0;
   } else if (buttonToggle === 0) {
     clearAllButton.classList.toggle("bg-accInactive");
     clearAllButton.classList.toggle("bg-accGreen1");
-    buttonToggle++;
+    buttonToggle = 1;
   }
 }
 
@@ -381,7 +381,10 @@ function assignValuePercent(event) {
   } else if (
     buttonToggle === 1 &&
     tipPercent <= 0 &&
-    event.target !== fivePercentButton
+    event.target !== fivePercentButton &&
+    totalPeople === 0 &&
+    tipPercent === 0 &&
+    billToPay === 0 
   ) {
     clearAllButton.classList.toggle("bg-accInactive");
     clearAllButton.classList.toggle("bg-accGreen1");
